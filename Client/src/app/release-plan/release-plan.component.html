@@ -1,4 +1,4 @@
-<!--main-container-->
+ <!--main-container-->
 <div class="container-fluid" ng-controller="dateCtrl">
   <!--this button takes you to the page where you can add a new release-->
   <button class="btn-lg newRelease" data-toggle="modal" data-target="#add">
@@ -6,113 +6,54 @@
   </button>
   <br>
   <hr>
-  <div class="topHead col">
+  <div class="topHead">
     <h4 class="text-responsive text-center"><strong>Increment Plan</strong></h4>
   </div>
   <br>
   <div class="row container-fluid">
     <!--container for existing release-->
-    <div class="col-lg-7">
-        <table id="fresh-table" class="table table-responsive"><!--start of table-->
-          <thead><!--start of table head-->
-            <tr>
-              <th data-field="code">Increament</th>
-              <th data-field="name">Start Date</th>
-              <th data-field="location" >Days</th>
-              <th data-field="oucode" >End Date</th>
-              <th data-field="pacode">Size</th>
-              <th data-field="psacode" >Status</th>
-              <th data-field="cccode" >Release Date</th>
-              <th data-field="designation">Goal</th>
-            </tr>
-          </thead><!--end of table head-->
-          <tbody><!--start of table body-->
-              <tr *ngFor="let list of release | paginate:{ itemsPerPage: noOfitem, currentPage:p} ">
-                  <td>{{list.increment}}</td>
-                  <td>{{list.startDate | date}}</td>
-                  <td>{{list.days}}</td>
-                  <td>{{list.endDate | date}}</td>
-                  <td>{{list.size}}</td>
-                  <td>{{list.status}}</td>            
-                  <td>{{list.releaseDate | date}}</td>
-                  <td>{{list.goal}}</td>
-              </tr>
-          </tbody><!--end of table body-->
-      </table>
-      </div>
-<div class="col-lg-5">
-    <div class="card">
-        <div class="card-body">
-
-          <h4 class="card-title card-head text-center">Card title</h4>
-          <div class="card-text" *ngFor="let story of sprints" >
-              <div class="list-group">
-                  <div class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                       <h5 class="mb-1">List group item heading</h5>
-                      <small class="text-muted">3 days ago</small>
-                    </div>
-                    <small class="text-muted">Donec id elit non mi porta.</small>
-                  </div>
-                 </div>
-              
-          </div>
-          <a href="#!" class="btn btn-primary">Go somewhere</a>
-        </div>
-       </div>
-    <!-- <div class="story" *ngFor="let story of sprints">
-        <div class="card-text " id="story_name">
-          <p>{{story.sprintId}}:{{story.sprintGoal}}</p>
-        </div>
-      </div> -->
-</div>
-</div>
-
-
-
-
-
-      <!-- getting an existing release lists
+    <div class="col-md-9">
+      <!--getting an existing release lists-->
       <div class="card" *ngFor="let list of release">
         <div class="row">
           <div class="col-9">
             <div class="card-header">
-              release name from database
+              <!--release name from database-->
               <strong class="text-responsive">&nbsp;&nbsp;Release Name : {{list.releaseName}}</strong>
             </div>
             <hr>
-            status of particular release
+            <!--status of particular release-->
             <h5 class="card-subtitle mb-2">&nbsp;Status: {{list.status}}</h5>
             <br>
             <div class="row">
-              release start date
+              <!--release start date-->
               <h6 class="card-subtitle col">&nbsp;Start Date : {{list.startDate | date: "dd.MM.y"}}</h6>
-              release release date
+              <!--release release date-->
               <h6 class="card-subtitle col">&nbsp;Release Date : {{list.releaseDate | date: "dd.MM.y"}}</h6>
             </div>
             <br>
-            description
-            <p class="card-text">&nbsp;Description : {{list.description}}</p>
+            <!--description-->
+            <p class="card-text">&nbsp;Goal : {{list.goal}}</p>
             <br>
           </div>
           <div class="col-3 card">
-            column for adding a sprint into a particular release
+            <!--column for adding a sprint into a particular release-->
             <div class="text-center card-header sprintsList">
               <strong>Add Sprints:</strong>
             </div>
-            dragging and storing a sprints from a sprint list
-            <div dnd-droppable (onDropSuccess)="updateReleaseInSprint($event,list.releasePlanId)" [dropZones]="['boxers-zone']" class="panel panel-info sprintPortion">
+            <!--dragging and storing a sprints from a sprint list-->
+            <div dnd-droppable (onDropSuccess)="updateReleaseInSprint($event,list.increment)" [dropZones]="['boxers-zone']" class="panel panel-info sprintPortion">
               <div class="story" *ngFor="let story of sprints">
-                <div class="card-text " id="story_name" *ngIf=compareStory(list.releasePlanId,story.releasePlanId)>
+                <div class="card-text " id="story_name" *ngIf=compareStory(list.increment,story.increment)>
                   <p>{{story.sprintId}}:{{story.sprintGoal}}</p>
                 </div>
               </div>
               <ul>
-                <li>Drop Here</li>
+                <li *ngIf ="flag == 'false'">Drop Here</li>
               </ul>
             </div>
           </div>
-          column ends
+          <!--column ends-->
         </div>
       </div>
     </div>
@@ -124,23 +65,22 @@
             <div class="card-header">
               <strong class="text-center">Lists of Sprints:</strong>
             </div>
-              drag n drop starts
+              <!--drag n drop starts-->
               <ul class="card-body" *ngFor="let item of sprints; let i = index" [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]="true"
                 [dragData]="item">
-                list of all sprints related to a project id
-                <li *ngIf="item.releasePlanId == 0">{{item.sprintId}}:{{item.sprintGoal}}</li>
-              drag and drop ends
+                <!--list of all sprints related to a project id-->
+                <li *ngIf="item.increment == 0">{{item.sprintId}}:{{item.sprintGoal}}</li>
+              <!--drag and drop ends-->
             </ul>
         </div>
       </div>
     </div>
   </div>
-  contaimer for existing release ends -->
- <!-- </div> -->
- <!--main container ends-->
- 
- <!-- Modal -->
- <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--contaimer for existing release ends-->
+</div>
+<!--main container ends-->
+<!-- Modal -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -170,7 +110,7 @@
                   <h5 class="col" id="increment">Increment</h5>
                 </label>
                 <div class="col">
-                  <input name="increment" [(ngModel)]="releasePlan.increment"  placeholder="Enter increment" class="form-control" type="text"  id="increment">
+                  <input name="increment" [(ngModel)]="releasePlan.increment"  placeholder="Enter increment" class="form-control" type="number"  id="increment">
                 </div>
               </div>
               <br>

@@ -1,7 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
-@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 button.newRelease {
- font-family: 'Raleway', Arial, sans-serif;
  border: none;
  background-color: #000000 ;
  border-radius: 5px;
@@ -120,10 +117,7 @@ ul{
   height: 50px;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
-@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 button.snip1099 {
-  font-family: 'Raleway', Arial, sans-serif;
   border: none;
   background-color: #32456d;
   border-radius: 5px;

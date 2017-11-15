@@ -23,6 +23,7 @@ export class ReleasePlanComponent implements OnInit {
  connection:HubConnection;
  errorMsg: string;
  userId:number;
+ flag:boolean = false;
 
  constructor(private router:Router,private route:ActivatedRoute) { }
 
@@ -33,7 +34,7 @@ export class ReleasePlanComponent implements OnInit {
    this.connection = new HubConnection(ConfigFile.ReleasePlanUrls.connection);
    this.connection.on("whenAdded", data => { swal('ADDED','','success' );});
    this.connection.on("getreleaseplans", data => {this.release = data });
-   this.connection.on("getsprints", sprint =>{this.sprints=sprint;});
+   this.connection.on("getsprints", sprint =>{this.sprints = sprint;});
    this.connection.start().then(() => {
    this.connection.invoke("SetConnectionId",this.userId);
    this.connection.invoke("GetReleasePlans",this.projectId)
@@ -41,7 +42,7 @@ export class ReleasePlanComponent implements OnInit {
    })
    .catch(err=>{                        
      this.errorMsg=err;
-     this.router.navigate(['/app-error/'+this.errorMsg]);
+     this.router.navigate(['/app-error']);
    });
  }
 
@@ -68,7 +69,7 @@ export class ReleasePlanComponent implements OnInit {
  //Method for comparing a release plan
  compareStory(releasePlanId,inreleasePlanId)
  {
-    if(releasePlanId == inreleasePlanId) return true;
+    if(releasePlanId == inreleasePlanId) {this.flag = true; return true;}
     else return false;
  }
 
@@ -84,11 +85,12 @@ export class ReleasePlanComponent implements OnInit {
          if (this.releasePlan.startDate < this.releasePlan.endDate && this.releasePlan.releaseDate > this.releasePlan.endDate)//release will be replaced with release plan
           {
            this.releasePlan.projectId = this.projectId;
+           console.log(this.releasePlan);
            this.connection.invoke("AddRelease",this.releasePlan)
                           .then(() =>{ swal('Added Successfully','','success');this.connection.invoke("GetReleasePlans",this.projectId)})
                           .catch(err=>{                        
                            this.errorMsg=err;
-                           this.router.navigate(['/app-error/'+this.errorMsg]);
+                           this.router.navigate(['/app-error']);
                          });
          }
          else {

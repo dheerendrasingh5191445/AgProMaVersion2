@@ -13,12 +13,18 @@
   color: #fff;
   padding-top: 10px;
 }
-
+.headingu {
+  background-color: #32456d;
+  color: #fff;
+  text-align: center;
+}
 .inActivePencilIcon
 {
   opacity: 0.2;
 }
-
+.close {
+  color:whitesmoke;
+}
 
 .complete
 {
@@ -48,6 +54,10 @@ img {
 }
 .form-control {
   margin-top: -13px;
+}
+.submitu {
+  background-color: #009999;
+  color: #fff;
 }
 .material-switch > input[type="checkbox"] {
     display: none;  
