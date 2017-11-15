@@ -82,7 +82,7 @@ namespace AgpromaWebAPI.Repository
         public void Update_RemainingTime(ChecklistBacklog checklist)
         {
             TaskBacklog task = _context.Tasks.FirstOrDefault(m => m.TaskId == checklist.TaskId);
-            task.Remaining = task.Remaining - checklist.RemainingSize;
+            task.Remaining = task.Remaining+checklist.RemainingSize;
             _context.SaveChanges();
         }
     }

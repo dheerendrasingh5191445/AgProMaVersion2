@@ -7,6 +7,7 @@ export class Checklist {
           public  completedSize :number;
           public actualSize : number;
           public checklistId?:number;
+          public calculateDiff:number;
 
     }
     

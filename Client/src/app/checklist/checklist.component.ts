@@ -31,6 +31,7 @@ export class ChecklistComponent implements OnInit {
   countChecklist: number = 0;
   details: Checklist[];
   actualSizeMax: number;
+  calculateDiff:number;
   model: Checklist = 
   {
     checklistId:0,
@@ -40,7 +41,8 @@ export class ChecklistComponent implements OnInit {
     status:false,
     plannedSize:0,
     remainingSize:0,
-    completedSize:0
+    completedSize:0,
+    calculateDiff:0
   };
   dailyStatus:Checklist;
   Event:any;
@@ -155,16 +157,16 @@ export class ChecklistComponent implements OnInit {
     {
       if(event.target.value >= this.details[this.checkListSelectedIndex].actualSize)
       {
-        let calculateDiff = event.target.value - this.details[this.checkListSelectedIndex].actualSize
-        this.actualSizeMax = this.actualSizeMax + calculateDiff; 
+        this.calculateDiff = event.target.value - this.details[this.checkListSelectedIndex].actualSize
+        this.actualSizeMax = this.actualSizeMax + this.calculateDiff; 
         this.remainSize.nativeElement.textContent = this.actualSizeMax;
       }
       else
       {
         
-        let calculateDiff = this.details[this.checkListSelectedIndex].actualSize - event.target.value;
-        this.actualSizeMax = this.actualSizeMax - calculateDiff;
-        console.log(this.actualSizeMax, calculateDiff);
+        this.calculateDiff = this.details[this.checkListSelectedIndex].actualSize - event.target.value;
+        this.actualSizeMax = this.actualSizeMax - this.calculateDiff;
+        console.log(this.actualSizeMax, this.calculateDiff);
         this.remainSize.nativeElement.textContent = this.actualSizeMax;
       }
     }
@@ -185,11 +187,13 @@ export class ChecklistComponent implements OnInit {
   }
   updateDailyStatus()
   {
-    
+    this.model.plannedSize=this.details[this.checkListSelectedIndex].plannedSize;
     this.model.remainingSize=this.remainSize.nativeElement.textContent;
     this.model.checklistId=this.details[this.checkListSelectedIndex].checklistId;
     this.model.taskId=this.details[this.checkListSelectedIndex].taskId;
     this.model.checklistName = this.checkListDetail.nativeElement.value;
+    this.model.actualSize=this.actualSizeMax;
+    this.model.calculateDiff = this.actualSizeMax-this.details[this.checkListSelectedIndex].actualSize;
     if(this.model.remainingSize == 0){
       this.model.status=true;
       this.checkListService.updateDailyStatusofTask(this.model).then(()=>this.onStartComponent());

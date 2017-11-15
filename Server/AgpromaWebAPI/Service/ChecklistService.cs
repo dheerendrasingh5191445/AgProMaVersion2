@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AgpromaWebAPI.model;
 using AgpromaWebAPI.Repository;
+using AgpromaWebAPI.Viewmodel;
 
 namespace AgpromaWebAPI.Service
 {
@@ -14,17 +15,15 @@ namespace AgpromaWebAPI.Service
         List<ChecklistBacklog> Get(int id);
         void Add_Checklist(ChecklistBacklog addChecklist);
         void Delete(int id);
-        void Update_DailyStatus(ChecklistBacklog checklist);
+        void Update_DailyStatus(CheckList checklist);
 
     }
     public class ChecklistService : ICheckListService
     {
         private ICheckListRepository _context; //repository instance
-        private ITaskServices _taskservice;
-        public ChecklistService(ICheckListRepository con,ITaskServices taskservice)
+        public ChecklistService(ICheckListRepository con)
         {
             _context = con;
-            _taskservice = taskservice;
        
         }
         //add checklist
@@ -53,10 +52,9 @@ namespace AgpromaWebAPI.Service
             return _context.GetTaskDetail(Id);
         }
         //update checklist remaining time
-        public void Update_DailyStatus(ChecklistBacklog checklist)
+        public void Update_DailyStatus(CheckList checklist)
         {
             _context.Update_DailyStatus(checklist);
-            _taskservice.Update_RemainingTime(checklist);
          
         }
 

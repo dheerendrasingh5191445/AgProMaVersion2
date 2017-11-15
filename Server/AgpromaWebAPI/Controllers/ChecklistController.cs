@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AgpromaWebAPI.Service;
 using AgpromaWebAPI.model;
+using AgpromaWebAPI.Viewmodel;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -122,7 +123,7 @@ namespace AgpromaWebAPI.Controllers
         }
         [HttpPut]
        [Route("api/[controller]/updateDailyStatus/{id}")]
-        public IActionResult Put([FromBody]ChecklistBacklog checklist) //delete checklist
+        public IActionResult Put([FromBody]CheckList checklist) //delete checklist
         {
             try
             {

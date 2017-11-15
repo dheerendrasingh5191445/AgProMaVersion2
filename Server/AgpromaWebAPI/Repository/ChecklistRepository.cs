@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AgpromaWebAPI.model;
 using Microsoft.EntityFrameworkCore;
+using AgpromaWebAPI.Viewmodel;
 
 namespace AgpromaWebAPI.Repository
 {
@@ -14,7 +15,7 @@ namespace AgpromaWebAPI.Repository
         List<ChecklistBacklog> Get(int id);
         void Add_Checklist(ChecklistBacklog addchecklist);
         void Delete(int id);
-        void Update_DailyStatus(ChecklistBacklog checklist);
+        void Update_DailyStatus(CheckList checklist);
     }
     public class ChecklistRepository : ICheckListRepository 
     {
@@ -55,7 +56,7 @@ namespace AgpromaWebAPI.Repository
         }
 
 
-        public void Update_DailyStatus(ChecklistBacklog checklist)
+        public void Update_DailyStatus(CheckList checklist)
         {
             ChecklistBacklog updatechecklist = _context.Checklists.FirstOrDefault(m => m.ChecklistId == checklist.ChecklistId);
             updatechecklist.ChecklistName = checklist.ChecklistName;
@@ -72,19 +73,24 @@ namespace AgpromaWebAPI.Repository
 
 
 
-        public void updateActual(ChecklistBacklog checklist)
+        public void updateActual(CheckList checklist)
         {
+           // var checklistt = _context.Checklists.Where(c => c.ChecklistId == checklist.ChecklistId).FirstOrDefault();
+            //var diff1=che
+
+
             var task = _context.Tasks.Where(t => t.TaskId == checklist.TaskId).SingleOrDefault();
-            var diff = checklist.ActualSize - checklist.PlannedSize;
-            task.ActualSize = task.ActualSize + diff;
+           // var diff = checklist.ActualSize - checklist.PlannedSize;
+            task.ActualSize = task.ActualSize + checklist.calculateDiff;
+            task.Remaining = task.ActualSize-task.Remaining;
 
             var storyid = _context.Tasks.Where(t => t.TaskId == task.TaskId).Select(t => t.StoryId).FirstOrDefault();
             var userstory = _context.Userstories.Where(u => u.StoryId == storyid).FirstOrDefault();
-            userstory.ActualSize = userstory.ActualSize + diff;
+            userstory.ActualSize = userstory.ActualSize + checklist.calculateDiff;
 
             var sprintid = _context.Sprint_UserStory.Where(s => s.StoryId == storyid).Select(s => s.SprintId).FirstOrDefault();
             var sprint = _context.Sprints.Where(s => s.SprintId == sprintid).SingleOrDefault();
-            sprint.ActualSize = sprint.ActualSize + diff;
+            sprint.ActualSize = sprint.ActualSize + checklist.calculateDiff;
 
             TaskBurnDown tb = new TaskBurnDown();
             tb.TaskId = task.TaskId;
@@ -93,6 +99,8 @@ namespace AgpromaWebAPI.Repository
             tb.PointRemaining = checklist.RemainingSize;
             tb.UserId = userstory.UserId;
             tb.Date = DateTime.UtcNow;
+            _context.TaskBurnDowns.Add(tb);
+
 
         }
 

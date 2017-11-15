@@ -100,8 +100,9 @@
         <td class="tableData">{{item.actualSize}}</td>
         <td class="tableData">{{item.completedSize}}/{{item.remainingSize}}</td>
         <td class="tableData">
-                <i *ngIf="item.status==true" class="fa fa-check fa-2x complete" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Checklist Completed"></i>
-                <i *ngIf="item.status==false" class="fa fa-spinner fa-2x pending" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Work Pending"></i>
+          <i *ngIf="item.remainingSize==0" class="fa fa-check fa-2x complete" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Checklist Completed"></i>
+          <i *ngIf="item.completedSize > 0 && item.remainingSize > 0" class="fa fa-spinner fa-2x pending" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Work Pending"></i>
+          <i *ngIf="item.completedSize == 0" class="fa fa-ban fa-2x pending" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Not Done Yet"></i>
         </td>
         
         <td class="tableData">
