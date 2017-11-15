@@ -18,7 +18,6 @@ export class ChecklistService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   //method used to add checklist
   addCheckList(checklist: Checklist) {
-    console.log(checklist);
     return this.http.post(ConfigFile.ChecklistServiceUrl.checkListUrl, checklist, { headers: this.headers })
                     .catch((error: any) => {
     return Observable.throw(this.router.navigate(['/app-error/']));
@@ -65,7 +64,6 @@ getById(id){
 
   }
   updateDailyStatusofTask(dailyStatus:Checklist){
-    console.log("hellooooooooo",dailyStatus);
     return this.http.put(ConfigFile.ChecklistServiceUrl.updateDailyStatus+dailyStatus.checklistId,dailyStatus,{headers : this.headers}).toPromise().
     catch((error: any) => {
       if(error==400){

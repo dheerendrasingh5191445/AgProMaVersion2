@@ -52,7 +52,7 @@ export class TeamsComponent implements OnInit {
     this.connection.invoke("GetTeams",this.projectId)
                    .then(data => {this.connection.invoke("GetAvailableMember",this.projectId);})
                    .catch(error=>{
-                   this.errorMsg = error ;{console.log("error is "+this.errorMsg)} this.router.navigate(['/app-error/'+this.errorMsg])
+                   this.errorMsg = error ; this.router.navigate(['/app-error/'+this.errorMsg])
                    });
     });
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { ConfigFile } from "../config";
 import { Router } from "@angular/router";
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ForgetServiceService {

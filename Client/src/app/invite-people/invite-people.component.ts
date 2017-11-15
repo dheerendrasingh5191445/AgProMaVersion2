@@ -53,7 +53,6 @@ private userDetail={
     else {
       this.invitePeople.emailto(this.model)
         .then(data => {
-          console.log("hellooooo",data);
           if(data.json()=="Already Exist"){
           swal('', 'Team Member Already Exist', 'error')}
           else if(data.json()=="Mail Sent"){

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions,Response } from '@angular/http';
 import { ConfigFile } from './../config';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import { Master } from "./../model/master";
 import { Router } from "@angular/router";
 

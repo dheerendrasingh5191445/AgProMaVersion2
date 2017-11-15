@@ -81,7 +81,6 @@ export class BacklogComponent implements OnInit {
         this.model.plannedSize = size;
         this.model.actualSize= size;
         
-        console.log("add function",this.model);
         //invoke backend post method
         this.connection.invoke("PostBacklog", this.model)
                       .then(data=>{swal('User Story Added', '', 'success')

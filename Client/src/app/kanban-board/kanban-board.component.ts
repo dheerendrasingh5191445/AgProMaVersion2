@@ -177,7 +177,6 @@ options: {
                                           p.tasks.forEach((r,i) => this.showList.push(r));
                                         }
     }));
-    console.log(this.showList);
   }
 
 

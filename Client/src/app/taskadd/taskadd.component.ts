@@ -63,7 +63,6 @@ export class TaskAddComponent implements OnInit {
      let model = new Task(this.storyId,taskName,this.owner,this.status,startDate,endDate,description,plannedSize);
      model.startDate= this.startDate['formatted'];
      model.endDate=this.endDate['formatted'];
-     console.log(model);
      this.connection.invoke("PostTask",model,this.storyId)
       this.connection.invoke("GetTaskBacklogs",this.storyId);
    }
@@ -75,7 +74,6 @@ export class TaskAddComponent implements OnInit {
   //this will uddate task backlog values
  updateBacklog(taskId:number,content: any, startDate: any, endDate: any,description:any,plannedSize:any) {
    //this will give alert if no task is entered for updation(empty value)
-   console.log(plannedSize);
    if ((content.replace(/ /g , "") == "")) {
      swal('Enter Some Task', '', 'warning')
    }

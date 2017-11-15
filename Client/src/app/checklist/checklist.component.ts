@@ -62,7 +62,6 @@ export class ChecklistComponent implements OnInit {
     this.checkListService.getCheckList(this.model.taskId)
       .subscribe(data => {
         this.details = data; 
-        console.log(this.details);
         this.totalCount = 0;
         this.countChecklist=0;
         for (let i in this.details) {
@@ -79,7 +78,6 @@ export class ChecklistComponent implements OnInit {
   // for adding checklist of user
   addCheckList() {
     let size=this.model.plannedSize;
-    console.log("add checklist",size);
     this.model.remainingSize=size;
     this.model.actualSize =size;
     if((this.model.checklistName) ==null || (this.model.plannedSize == 0)){
@@ -142,7 +140,6 @@ export class ChecklistComponent implements OnInit {
     this.remainSize.nativeElement.textContent=this.details[i].remainingSize;
     this.actualSizeMax = this.details[i].remainingSize;
     this.actualSize.nativeElement.value = this.details[i].actualSize;
-    console.log('actual Size',this.actualSizeMax);
   }
   calculateActual(event){
     this.completedSize.nativeElement.value = 0;
@@ -151,7 +148,6 @@ export class ChecklistComponent implements OnInit {
     if(event.target.value === undefined || event.target.value ==='')
     {
       this.actualSize.nativeElement.value = this.details[this.checkListSelectedIndex].actualSize;
-      console.log(this.actualSize.nativeElement.value);
     }
     else
     {
@@ -166,7 +162,6 @@ export class ChecklistComponent implements OnInit {
         
         this.calculateDiff = this.details[this.checkListSelectedIndex].actualSize - event.target.value;
         this.actualSizeMax = this.actualSizeMax - this.calculateDiff;
-        console.log(this.actualSizeMax, this.calculateDiff);
         this.remainSize.nativeElement.textContent = this.actualSizeMax;
       }
     }

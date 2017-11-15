@@ -85,7 +85,6 @@ export class ReleasePlanComponent implements OnInit {
          if (this.releasePlan.startDate < this.releasePlan.endDate && this.releasePlan.releaseDate > this.releasePlan.endDate)//release will be replaced with release plan
           {
            this.releasePlan.projectId = this.projectId;
-           console.log(this.releasePlan);
            this.connection.invoke("AddRelease",this.releasePlan)
                           .then(() =>{ swal('Added Successfully','','success');this.connection.invoke("GetReleasePlans",this.projectId)})
                           .catch(err=>{                        
