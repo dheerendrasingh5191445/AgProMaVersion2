@@ -54,7 +54,7 @@ describe('BacklogComponent', () => {
         fixture.detectChanges();
         de = fixture.debugElement.query(By.css("h5"));
         el = de.nativeElement;
-        expect(el.textContent).toEqual("Details");
+        expect(el.textContent).toEqual(" Add New");
       });
   }));
   it('projectName ', async(() => { //third test case
