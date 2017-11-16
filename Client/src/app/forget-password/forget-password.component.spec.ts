@@ -52,14 +52,4 @@ describe('ForgetPasswordComponent', () => {
     inject([XHRBackend], (backend: MockBackend) => {
       expect(backend).not.toBeNull('backend should be provided');
     }));
-  it('generateEmail', async(() => { //fourth test case
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      de = fixture.debugElement.query(By.css('#generateEmail'));
-      el = de.nativeElement;
-      el.click();
-      expect(spygenerateEmail.calls.any()).toEqual(true);
-    });
-  }));
 });

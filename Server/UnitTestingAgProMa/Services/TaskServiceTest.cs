@@ -35,25 +35,6 @@ namespace UnitTestingAgProMa.Services
         }
 
         [Fact]
-        public void Task_Service_GetAll_Method_To_GetAll_Request_Type_Object()
-        {
-            //Arrange
-            List<TaskBacklog> requests = new List<TaskBacklog>();
-            var request = new TaskBacklog();
-            request.StoryId = 1;
-            requests.Add(request);
-            //mocking RequestRepository
-            var mockRepoReq = new Mock<ITaskRepository>();
-            //mocking GetAll() of RequestRepository                              
-            mockRepoReq.Setup(x => x.GetAll(1)).Returns(requests);
-            TaskService obj = new TaskService(mockRepoReq.Object);
-            //Act
-            var res = obj.GetAll(1);
-
-            //Assert
-            Assert.IsType<List<TaskBacklogView>>(res);
-        }
-        [Fact]
         public void Task_Service_JoinGroup_Method_To_See_Changes_Made()
         {
             //Arrange
@@ -87,24 +68,6 @@ namespace UnitTestingAgProMa.Services
             var res = obj.JoinGroup(It.IsAny<int>());
             //Assert
             Assert.IsType<List<SignalRMaster>>(res);
-        }
-        [Fact]
-        public void Task_Service_Get_Method_To_Get_ProjectId()
-        {
-            //Arrange
-            List<TaskBacklog> requests = new List<TaskBacklog>();
-            var request = new TaskBacklog();
-            request.TaskId = 1;
-            requests.Add(request);
-            var r = new Sprint();
-            var mockRepoReq = new Mock<ITaskRepository>(); //mocking RequestRepository
-            mockRepoReq.Setup(x => x.GetProjectId(It.IsAny<int>())).Returns(1);
-            TaskService obj = new TaskService(mockRepoReq.Object);
-            //Act
-            var res = obj.GetProjectId(1);
-            //Assert
-            Assert.NotNull(res);
-            Assert.Equal(It.IsAny<int>(), res);
         }
 
         [Fact]
@@ -140,21 +103,6 @@ namespace UnitTestingAgProMa.Services
             TaskService obj = new TaskService(mockRepo.Object);
             var exception = Record.Exception(() => obj.Add(Backlog));
             Assert.IsType<NullReferenceException>(exception);
-        }
-        [Fact]
-        public void Task_Service_Add_Method_Throws_FormatException_With_InvalidValue_Type()
-        {
-            //Arrange
-            TaskBacklog Backlog = new TaskBacklog();
-            Backlog.StoryId = 1;
-            TaskBacklog Backlog1 = new TaskBacklog();
-            Backlog.StoryId = 2;
-            var request = new TaskBacklog();
-            var mockRepo = new Mock<ITaskRepository>();
-            mockRepo.Setup(x => x.Add(Backlog)).Throws(new FormatException());
-            TaskService obj = new TaskService(mockRepo.Object);
-            var exception = Record.Exception(() => obj.Add(Backlog));
-            Assert.IsType<FormatException>(exception);
         }
         [Fact]
         public void Task_Service_Update_Method_Throws_NullReferenceException_With_Invalid_ValueType()

@@ -65,23 +65,6 @@ describe('ProjectScreenService', () => {
           expect(data[3].technologyUsed).toEqual("ANGULAR");
         });
       }));
-    it('getProject',             //Fourth test case Begins
-      inject([ProjectScreenService, XHRBackend], (ProjectScreenService, mockBackend) => {      //injecting the service and backend dependencies
-        mockBackend.connections.subscribe((connection) => {          /* setting up connections to Http whenever someone subcribes 
-                                                           to an http call */
-          connection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(mockResponse)
-          })));
-        });
-        ProjectScreenService.getProject(1).then((data) => {
-          let response: Array<any> = data.json();
-          expect(response.length).toBe(4);
-          expect(response[0].leaderId).toEqual(29);
-          expect(response[0].name).toEqual("Testing");
-          expect(response[0].projectDescription).toEqual("hello");
-          expect(response[0].technologyUsed).toEqual("ANGULAR");
-        });
-      }));
     it('addNewProject',                                  //Eigth test case begins
       inject([ProjectScreenService, XHRBackend], (projectScreenService, mockBackend) => {
         mockBackend.connections.subscribe((connection) => {

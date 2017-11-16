@@ -188,17 +188,5 @@ describe('LoginService', () => {
                 loginService.postMemberDetails({ "Id": 29, "FirstName": "Testing", "LastName": "hello", "Organization": "ANGULAR" })
                     .then((res) => { expect(res.status).toBe(200); })
             }));
-        it('updatePassword',                                  //Fourteenth test case begins
-            inject([LoginService, XHRBackend], (loginService, mockBackend) => {
-                mockBackend.connections.subscribe((connection) => {
-                    connection.mockRespond(new Response(new ResponseOptions({
-                        status: 200
-                    })
-                    ));
-                    expect(connection.request.method).toEqual(RequestMethod.Put, 'should return with correct method');
-                });
-                loginService.updatePassword(18, { "leaderId": 29, "name": "Testing", "projectDescription": "hello", "technologyUsed": "ANGULAR" })
-                    .subscribe((res) => { expect(res.status).toBe(200); })
-            }));
     });
 });

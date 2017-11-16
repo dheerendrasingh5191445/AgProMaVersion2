@@ -57,15 +57,6 @@ describe('BacklogComponent', () => {
         expect(el.textContent).toEqual(" Add New");
       });
   }));
-  it('projectName ', async(() => { //third test case
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      de = fixture.debugElement.query(By.css("#projectName"));
-      el = de.nativeElement;
-      expect(el.textContent).toEqual("Project Name :");
-    });
-}));
 it('size details ', async(() => { //fourth test case
   fixture.detectChanges();
   fixture.whenStable().then(() => {

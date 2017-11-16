@@ -28,9 +28,7 @@ namespace AgpromaWebAPI.Repository
         {
             ProjectFullData profulldata = new ProjectFullData();
                 profulldata.Release = (from r in _context.ReleasePlans
-                               where r.ProjectId == projectId
-                               join s in _context.Sprints
-                               on r.Increment equals s.Increment  
+                               where r.ProjectId == projectId  
                                select r).ToList();
                 profulldata.Sprint = _context.Sprints.Where(p => p.ProjectId == projectId).ToList();
 
