@@ -21,6 +21,9 @@ list-style:none;
 background-color: transparent;
 border-color:transparent;
 }
+.list {
+    margin-top: 10px;
+}
 
 li::before{
     content:"\2022";
@@ -30,12 +33,6 @@ li::before{
     background-color:#32456d;
     color: #fff;
 }
-/* .card-text li{
-    width: px;
-    height: 20px;
-    margin: 5px 20px 5px 20px;
-
-} */
 
 
 .icons{
@@ -114,4 +111,7 @@ height: 50px;
 width: 50px;
 border-radius: 50%;
 color: #32456d;
+}
+.card{
+    padding: 0px;
 }

@@ -13,7 +13,6 @@ import { ProjectMaster } from "../model/ProjectMaster";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { ProjectScreenService } from './project-screen.service';
-
 const mockResponse =                              //Response being mocked for testing
   [
     { "leaderId": 29, "name": "Testing", "projectDescription": "hello", "technologyUsed": "ANGULAR" },
@@ -50,7 +49,6 @@ describe('ProjectScreenService', () => {
         expect(backend).not.toBeNull('backend should be provided');
       }));
     //Third test case ends
-
     it('getAllProjectOfEmployee',             //Fourth test case Begins
       inject([ProjectScreenService, XHRBackend], (ProjectScreenService, mockBackend) => {      //injecting the service and backend dependencies
         mockBackend.connections.subscribe((connection) => {          /* setting up connections to Http whenever someone subcribes 
@@ -67,7 +65,6 @@ describe('ProjectScreenService', () => {
           expect(data[3].technologyUsed).toEqual("ANGULAR");
         });
       }));
-
     it('getProject',             //Fourth test case Begins
       inject([ProjectScreenService, XHRBackend], (ProjectScreenService, mockBackend) => {      //injecting the service and backend dependencies
         mockBackend.connections.subscribe((connection) => {          /* setting up connections to Http whenever someone subcribes 
@@ -85,7 +82,6 @@ describe('ProjectScreenService', () => {
           expect(response[0].technologyUsed).toEqual("ANGULAR");
         });
       }));
-
     it('addNewProject',                                  //Eigth test case begins
       inject([ProjectScreenService, XHRBackend], (projectScreenService, mockBackend) => {
         mockBackend.connections.subscribe((connection) => {
@@ -98,7 +94,6 @@ describe('ProjectScreenService', () => {
         projectScreenService.addNewProject({ "leaderId": 29, "name": "Testing", "projectDescription": "hello", "technologyUsed": "ANGULAR" })
           .then((res) => { expect(res.status).toBe(200); })
       }));
-
     it('deleteProject',                                  //Ninth test case begins
       inject([ProjectScreenService, XHRBackend], (projectScreenService, mockBackend) => {
         mockBackend.connections.subscribe((connection) => {
@@ -111,7 +106,6 @@ describe('ProjectScreenService', () => {
         projectScreenService.deleteProject(18)
           .then((res) => { expect(res.status).toBe(200); })
       }));
-
     it('updateProject',                                  //SIXTH test case begins
       inject([ProjectScreenService, XHRBackend], (projectScreenService, mockBackend) => {
         mockBackend.connections.subscribe((connection) => {

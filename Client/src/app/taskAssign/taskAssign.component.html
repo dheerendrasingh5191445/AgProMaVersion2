@@ -52,7 +52,7 @@
                    <!--body for team card-->
                    <div class="card-body scroll">
                        <ul class="list-group" *ngFor="let item of TeamMemberList; let i = index">
-                            <div class="chip">
+                            <div class="chip list">
                            
                            <li  [dropZones]="['boxers-zone']" dnd-draggable [dragEnabled]= "true" [dragData]="item" class="list-group-item tool"> <!--team member list-->
                                <i id="fa-user" class="fa fa-user"></i>

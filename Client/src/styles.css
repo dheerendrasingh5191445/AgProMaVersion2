@@ -1,15 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Hind:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700');
 html,
 body {
     width: auto;
     height: auto;
 }
 body{
-    font-family: 'Hind';
     background-color: #000;
-    color: #fff;font-family: 'Raleway', Arial, sans-serif !important;
+    color: #fff;
+    font-family: 'Raleway', Arial, sans-serif !important;
     
 }
 .brand-logo{

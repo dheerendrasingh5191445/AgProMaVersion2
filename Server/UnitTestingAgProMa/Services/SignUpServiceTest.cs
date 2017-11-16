@@ -1,10 +1,8 @@
 ﻿using AgProMa.Repository;
 using AgProMa.Services;
+using AgpromaWebAPI.model;
+using AgpromaWebAPI.Viewmodel;
 using Moq;
-using MyNeo4j.model;
-using MyNeo4j.Repository;
-using MyNeo4j.Service;
-using MyNeo4j.Viewmodel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +13,7 @@ namespace UnitTestingAgProMa.Services
     public class SignUpServiceTest
     {
         [Fact]
-        public void SignUp_Service_GetAllDetails_Method_To_Get_Details()
+        public void SignUp_Service_GetAllDetails_Method_To_Get_Details_Shoud_Not_Be_NotNull()
         {
             //Arrange
             List<User> requests = new List<User>();
@@ -31,6 +29,24 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetAllDetails();
             //Assert
             Assert.NotNull(res);
+        }
+
+        [Fact]
+        public void SignUp_Service_GetAllDetails_Method_To_Get_Details_Shoud_Compare_Values()
+        {
+            //Arrange
+            List<User> requests = new List<User>();
+            var request = new User();
+            request.Id = 1;
+            requests.Add(request);
+            //mocking RequestRepository
+            var mockRepoReq = new Mock<ISignUpRepository>();
+            //mocking GetAll() of RequestRepository
+            mockRepoReq.Setup(x => x.GetAllDetails()).Returns(requests);
+            SignUpService obj = new SignUpService(mockRepoReq.Object);
+            //Act
+            var res = obj.GetAllDetails();
+            //Assert
             Assert.Equal(requests, res);
         }
         [Fact]
@@ -52,10 +68,9 @@ namespace UnitTestingAgProMa.Services
             Assert.IsType<List<User>>(res);
         }
         [Fact]
-        public void SignUp_Service_Get_by_Id_Method()
+        public void SignUp_Service_Get_by_Id_Method_should_Not_Be_NotNull()
         {
             //Arrange
-            //List<Master> requests = new List<Master>();
             var request = new User();
             request.Id = 1;
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
@@ -65,13 +80,25 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetById(1);
             //Assert
             Assert.NotNull(res);
+        }
+        [Fact]
+        public void SignUp_Service_Get_by_Id_Method_should_Compare_Values()
+        {
+            //Arrange
+            var request = new User();
+            request.Id = 1;
+            var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
+            mockRepoReq.Setup(x => x.GetById(1)).Returns(request);
+            SignUpService obj = new SignUpService(mockRepoReq.Object);
+            //Act
+            var res = obj.GetById(1);
+            //Assert
             Assert.Equal(request, res);
         }
         [Fact]
         public void SignUp_Service_Get_by_Id_Method_Type_Object()
         {
             //Arrange
-            //List<Master> requests = new List<Master>();
             var request = new User();
             request.Id = 1;
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
@@ -86,7 +113,6 @@ namespace UnitTestingAgProMa.Services
         public void SignUpService_GetId_Method()
         {
             //Arrange
-            //List<Master> requests = new List<Master>();
             User request = new User();
             request.Id = 1;
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
@@ -96,13 +122,11 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetId(It.IsAny<String>());
             //Assert
             Assert.NotNull(res);
-            // Assert.Equal(request, res);
         }
         [Fact]
         public void SignUpService_GetId_Method_Type_Object()
         {
             //Arrange
-            //List<Master> requests = new List<Master>();
             User request = new User();
             request.Id = 1;
             var mockRepoReq = new Mock<ISignUpRepository>(); //mocking RequestRepository
@@ -119,13 +143,13 @@ namespace UnitTestingAgProMa.Services
             //Arrange
             User master = new User();
             master.Id = 1;
-            //TaskBacklog Backlog1 = new TaskBacklog();
-            //master.Id = 2;
             var request = new User();
             var mockRepo = new Mock<ISignUpRepository>();
             mockRepo.Setup(x => x.UpdatePassword(It.IsAny<int>(), It.IsAny<User>())).Throws(new NullReferenceException());
             SignUpService obj = new SignUpService(mockRepo.Object);
+            //Act
             var exception = Record.Exception(() => obj.UpdatePassword(It.IsAny<int>(), It.IsAny<User>()));
+            //Assert
             Assert.IsType<NullReferenceException>(exception);
         }
         [Fact]
@@ -138,7 +162,9 @@ namespace UnitTestingAgProMa.Services
             var mockRepo = new Mock<ISignUpRepository>();
             mockRepo.Setup(x => x.UpdatePassword(It.IsAny<int>(), It.IsAny<User>())).Throws(new FormatException());
             SignUpService obj = new SignUpService(mockRepo.Object);
+            //Act
             var exception = Record.Exception(() => obj.UpdatePassword(It.IsAny<int>(), It.IsAny<User>()));
+            //Assert
             Assert.IsType<FormatException>(exception);
         }
         [Fact]
@@ -151,7 +177,9 @@ namespace UnitTestingAgProMa.Services
             var mockRepo = new Mock<ISignUpRepository>();
             mockRepo.Setup(x => x.Update(It.IsAny<String>(), It.IsAny<User>())).Throws(new FormatException());
             SignUpService obj = new SignUpService(mockRepo.Object);
+            //Act
             var exception = Record.Exception(() => obj.Update(It.IsAny<string>(), It.IsAny<User>()));
+            //Assert
             Assert.IsType<FormatException>(exception);
         }
         [Fact]
@@ -164,7 +192,9 @@ namespace UnitTestingAgProMa.Services
             var mockRepo = new Mock<ISignUpRepository>();
             mockRepo.Setup(x => x.Update(It.IsAny<String>(), It.IsAny<User>())).Throws(new NullReferenceException());
             SignUpService obj = new SignUpService(mockRepo.Object);
+            //Act
             var exception = Record.Exception(() => obj.Update(It.IsAny<string>(), It.IsAny<User>()));
+            //Assert
             Assert.IsType<NullReferenceException>(exception);
         }
         [Fact]
@@ -198,10 +228,41 @@ namespace UnitTestingAgProMa.Services
             //Assert
             Assert.IsType<FormatException>(exception);
         }
-
-
         [Fact]
-        public void SignUp_Service_Check_Method_To_Get_Details()
+        public void SignUp_Service_Check_Method_To_Get_Details_By_Comparing_Values()
+        {
+            //Arrange
+            var idPass = new IdPassword();
+            idPass.Email = "preetam";
+            idPass.Password = "1234";
+            User master = new User();
+            master.Email = "preetam";
+            master.Password = "1234";
+            master.FirstName = "preetam";
+            master.Id = 1;
+            var creadential = new Creadential();
+            creadential.UserId = 1;
+            creadential.Status = "success";
+            creadential.UserName = "preetam";
+            creadential.Email = "preetam";
+
+            //mocking RequestRepository
+            var mockRepoReq = new Mock<ISignUpRepository>();
+            //mocking GetAll() of RequestRepository
+            mockRepoReq.Setup(x => x.Get(creadential.Email)).Returns(master);
+            mockRepoReq.Setup(x => x.SetLoggedIn(1, true)).Returns(true);
+
+            SignUpService obj = new SignUpService(mockRepoReq.Object);
+            //Act
+            var res = obj.Check(idPass);
+            //Assert
+            Assert.Equal(creadential.Email, res.Email);
+            Assert.Equal(creadential.Status, res.Status);
+            Assert.Equal(creadential.UserName, res.UserName);
+            Assert.Equal(creadential.UserId, res.UserId);
+        }
+        [Fact]
+        public void SignUp_Service_Method_To_Check_Get_Details_Should_Nor_Be_null()
         {
             //Arrange
             var idPass = new IdPassword();
@@ -229,10 +290,6 @@ namespace UnitTestingAgProMa.Services
             var res = obj.Check(idPass);
             //Assert
             Assert.NotNull(res);
-            Assert.Equal(creadential.Email, res.Email);
-            Assert.Equal(creadential.Status,res.Status);
-            Assert.Equal(creadential.UserName,res.UserName);
-            Assert.Equal(creadential.UserId,res.UserId);
         }
     }
 }

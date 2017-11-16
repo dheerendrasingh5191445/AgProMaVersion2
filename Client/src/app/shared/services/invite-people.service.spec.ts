@@ -63,7 +63,6 @@ describe('InvitePeopleService', () => {
         invitePeopleService.emailto({ "TeamId": 29, "MemberId": 33, "Id": 37, "MemberName": "Lakshya" })
           .then((res) => { expect(res.status).toBe(200); })
       }));
-
     it('getAll',             //Fourth test case Begins
       inject([InvitePeopleService, XHRBackend], (InvitePeopleService, mockBackend) => {      //injecting the service and backend dependencies
         mockBackend.connections.subscribe((connection) => {          /* setting up connections to Http whenever someone subcribes 

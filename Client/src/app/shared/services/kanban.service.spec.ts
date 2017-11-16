@@ -9,12 +9,9 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockBackend } from '@angular/http/testing';
 import { FormsModule } from '@angular/forms';
-
 import { KanbanService } from './kanban.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-
-
 import { Burndown } from '../model/burndown';
 const mockResponse =                              //Response being mocked for testing
   [
@@ -67,6 +64,5 @@ describe('KanbanService', () => {
           expect(data[3].taskName).toEqual("ANGULAR");
         });
       }));
-
   })
 });

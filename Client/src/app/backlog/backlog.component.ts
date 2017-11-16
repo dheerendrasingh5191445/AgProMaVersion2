@@ -69,9 +69,9 @@ export class BacklogComponent implements OnInit {
   }
 
   //Add a new user story
-  addBacklog(story: any, comment: any, priority,size:number) {
-    if (story == "" ||priority==null||size==null||comment=="") {
-      swal('Please fill user story', '', 'error');
+  addBacklog(story: any, comment: any, priority:any,size:any) {
+    if (story == "" || priority == "" || size == "" ||comment == "") {
+      swal('Please fill proper user story', '', 'error');
     } else {
       this.model.storyName = story;
         this.model.comments = comment
@@ -100,8 +100,8 @@ export class BacklogComponent implements OnInit {
 
   //for updating a particular user story
   updateBacklog(content:string, comment: any, priority: any, item,size:number) {
-    if (content == "") {
-      swal('Please fill user story', '', 'error');
+    if (content == "" || size == null || priority == null) {
+      swal('Please fill proper details', '', 'error');
     }
     else {
       item.storyName = content;

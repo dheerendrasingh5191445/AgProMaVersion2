@@ -1,7 +1,7 @@
-﻿using Moq;
-using MyNeo4j.model;
-using MyNeo4j.Repository;
-using MyNeo4j.Service;
+﻿using AgpromaWebAPI.model;
+using AgpromaWebAPI.Repository;
+using AgpromaWebAPI.Service;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,8 +12,6 @@ namespace UnitTestingAgProMa.Services
 {
    public class EpicServiceTest
     {
-
-
         [Fact]
         public void Epic_Service_GetAll_Method_To_GetAll_Epics()
         {

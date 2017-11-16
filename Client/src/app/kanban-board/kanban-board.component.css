@@ -247,6 +247,7 @@ u:hover{
   margin-left: 62px;
   border: 1px solid;
   overflow: auto;
+  padding: 0px;
 }
 .header{
   padding-top: 1px;

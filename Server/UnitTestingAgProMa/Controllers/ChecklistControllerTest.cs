@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AgpromaWebAPI.Controllers;
+using AgpromaWebAPI.model;
+using AgpromaWebAPI.Service;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
-using MyNeo4j.Controllers;
-using MyNeo4j.model;
-using MyNeo4j.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -130,4 +130,3 @@ namespace MyNeo4j_Test_Cases.Controllers
         }
     }
 }
-

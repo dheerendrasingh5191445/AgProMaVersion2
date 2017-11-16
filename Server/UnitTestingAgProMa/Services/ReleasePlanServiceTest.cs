@@ -1,7 +1,7 @@
-﻿using Moq;
-using MyNeo4j.model;
-using MyNeo4j.Repository;
-using MyNeo4j.Service;
+﻿using AgpromaWebAPI.model;
+using AgpromaWebAPI.Repository;
+using AgpromaWebAPI.Service;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,19 +17,18 @@ namespace UnitTestingAgProMa.Services
         public void Test_For_Checking_The_GetReleasePlan_Should_Be_NotNull()
         {
             //Arrange
-            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
-            var releaseModel = new ReleasePlanMaster()
+            List<ReleasePlan> releasePlan = new List<ReleasePlan>();
+            var releaseModel = new ReleasePlan()
             {
                 ReleasePlanId = 1
             };
             releasePlan.Add(releaseModel);
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             mockReleasePlanRepo.Setup(x => x.GetAllRelease(It.IsAny<int>())).Returns(releasePlan);
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
 
             //Act
-            List<ReleasePlanMaster> result = service.GetAllReleasePlan(1);
+            List<ReleasePlan> result = service.GetAllReleasePlan(1);
 
             //Assert
             Assert.NotNull(result);
@@ -40,22 +39,21 @@ namespace UnitTestingAgProMa.Services
         public void Test_For_Checking_The_GetReleasePlan_Is_Of_ReleasePlanMaster()
         {
             //Arrange
-            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
-            var releaseModel = new ReleasePlanMaster()
+            List<ReleasePlan> releasePlan = new List<ReleasePlan>();
+            var releaseModel = new ReleasePlan()
             {
                 ReleasePlanId = 1
             };
             releasePlan.Add(releaseModel);
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             mockReleasePlanRepo.Setup(x => x.GetAllRelease(It.IsAny<int>())).Returns(releasePlan);
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
 
             //Act
-            List<ReleasePlanMaster> result = service.GetAllReleasePlan(1);
+            List<ReleasePlan> result = service.GetAllReleasePlan(1);
 
             //Assert
-            Assert.IsType<List<ReleasePlanMaster>>(result);
+            Assert.IsType<List<ReleasePlan>>(result);
         }
 
         //Third Test Case
@@ -63,19 +61,18 @@ namespace UnitTestingAgProMa.Services
         public void Test_For_Checking_The_GetReleasePlan_Is_Not_Of_Any_Other_Model()
         {
             //Arrange
-            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
-            var releaseModel = new ReleasePlanMaster()
+            List<ReleasePlan> releasePlan = new List<ReleasePlan>();
+            var releaseModel = new ReleasePlan()
             {
                 ReleasePlanId = 1
             };
             releasePlan.Add(releaseModel);
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             mockReleasePlanRepo.Setup(x => x.GetAllRelease(It.IsAny<int>())).Returns(releasePlan);
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
 
             //Act
-            List<ReleasePlanMaster> result = service.GetAllReleasePlan(1);
+            List<ReleasePlan> result = service.GetAllReleasePlan(1);
 
             //Assert
             Assert.IsNotType<Sprint>(result);
@@ -86,30 +83,7 @@ namespace UnitTestingAgProMa.Services
             Assert.IsNotType<TeamMaster>(result);
         }
 
-        //Fourth Test Case
-        [Fact]
-        public void Test_For_GetAllSprints()
-        {
-            //Arrange
-            List<Sprint> sprintList = new List<Sprint>();
-            var sprint = new Sprint()
-            {
-                SprintId = 1
-            };
-            sprintList.Add(sprint);
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
-            mockSprintRepository.Setup(x => x.GetAll(It.IsAny<int>())).Returns(sprintList);
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object,mockSprintRepository.Object);
-
-            //Act
-            List<Sprint> result = service.GetAllSprints(It.IsAny<int>());
-
-            //Assert
-            Assert.NotNull(result);
-        }
-
-        //Fifth Test Case
+        //Fiourth Test Case
         [Fact]
         public void Test_For_SignalR_Should_Be_Not_Null()
         {
@@ -120,10 +94,9 @@ namespace UnitTestingAgProMa.Services
                 SignalId = 1
             };
             signal.Add(signalR);
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             mockReleasePlanRepo.Setup(x => x.CreateGroup(It.IsAny<int>())).Returns(signal);
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
 
             //Act
             List<SignalRMaster> result = service.CreateGroup(1);
@@ -132,7 +105,7 @@ namespace UnitTestingAgProMa.Services
             Assert.NotNull(result);
         }
 
-        //Sixth Test Case
+        //Fifth Test Case
         [Fact]
         public void Test_For_SignalR_Should_Be_Of_SignalRMaster()
         {
@@ -143,10 +116,9 @@ namespace UnitTestingAgProMa.Services
                 SignalId = 1
             };
             signal.Add(signalR);
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             mockReleasePlanRepo.Setup(x => x.CreateGroup(It.IsAny<int>())).Returns(signal);
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
 
             //Act
             List<SignalRMaster> result = service.CreateGroup(1);
@@ -155,49 +127,48 @@ namespace UnitTestingAgProMa.Services
             Assert.IsType<List<SignalRMaster>>(result);
         }
 
-        //Seventh Test Case
+        //Sixth Test Case
         [Fact]
         public void Test_for_Checking_AddRelease()
         {
             //arrange
-            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
-            var releaseModel = new ReleasePlanMaster()
+            List<ReleasePlan> releasePlan = new List<ReleasePlan>();
+            var releaseModel = new ReleasePlan()
             {
                 ReleasePlanId = 1
             };
             releasePlan.Add(releaseModel);
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             var mockSprintRepository = new Mock<ISprintRepository>();
-            mockReleasePlanRepo.Setup(m => m.AddRelease(It.IsAny<ReleasePlanMaster>())).Throws(new NullReferenceException());
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            mockReleasePlanRepo.Setup(m => m.AddRelease(It.IsAny<ReleasePlan>())).Throws(new NullReferenceException());
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
             //act
             var ex = Record.Exception(() => service.AddRelease(releaseModel));
             //assert
             Assert.IsType<NullReferenceException>(ex);
         }
 
-        //Eight Test Case
+        //Seventh Test Case
         [Fact]
         public void Test_for_Checking_AddRelease_Should_Be_NotNull()
         {
             //arrange
-            List<ReleasePlanMaster> releasePlan = new List<ReleasePlanMaster>();
-            var releaseModel = new ReleasePlanMaster()
+            List<ReleasePlan> releasePlan = new List<ReleasePlan>();
+            var releaseModel = new ReleasePlan()
             {
                 ReleasePlanId = 1
             };
             releasePlan.Add(releaseModel);
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
-            mockReleasePlanRepo.Setup(m => m.AddRelease(It.IsAny<ReleasePlanMaster>())).Throws(new NullReferenceException());
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
+            mockReleasePlanRepo.Setup(m => m.AddRelease(It.IsAny<ReleasePlan>())).Throws(new NullReferenceException());
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
             //act
             var ex = Record.Exception(() => service.AddRelease(releaseModel));
             //assert
             Assert.NotNull(ex);
         }
 
-        //Ninth Test Case
+        //Eigth Test Case
         [Fact]
         public void Test_for_Checking_UpdateConnectionId()
         {
@@ -206,10 +177,9 @@ namespace UnitTestingAgProMa.Services
             {
                 SignalId = 1
             };
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             mockReleasePlanRepo.Setup(m => m.UpdateConnectionId(It.IsAny<string>(), It.IsAny<int>())).Throws(new NullReferenceException());
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
             //act
             var ex = Record.Exception(() => service.UpdateConnectionId(It.IsAny<string>(), It.IsAny<int>()));
             //assert
@@ -225,10 +195,9 @@ namespace UnitTestingAgProMa.Services
             {
                 SignalId = 1
             };
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             mockReleasePlanRepo.Setup(m => m.UpdateConnectionId(It.IsAny<string>(), It.IsAny<int>())).Throws(new NullReferenceException());
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
             //act
             var ex = Record.Exception(() => service.UpdateConnectionId(It.IsAny<string>(), It.IsAny<int>()));
             //assert
@@ -244,11 +213,9 @@ namespace UnitTestingAgProMa.Services
             {
                 SprintId = 1
             };
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             mockReleasePlanRepo.Setup(m => m.UpdateReleaseInSprint(It.IsAny<int>(), It.IsAny<int>())).Throws(new NullReferenceException());
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
-            //act
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);           //act
             var ex = Record.Exception(() => service.UpdateReleaseInSprint(It.IsAny<Sprint>(), It.IsAny<int>()));
             //assert
             Assert.NotNull(ex);
@@ -262,10 +229,9 @@ namespace UnitTestingAgProMa.Services
             {
                 SprintId = 1
             };
-            var mockReleasePlanRepo = new Mock<IReleasePlanRepo>();
-            var mockSprintRepository = new Mock<ISprintRepository>();
+            var mockReleasePlanRepo = new Mock<IReleasePlansRepo>();
             mockReleasePlanRepo.Setup(m => m.UpdateReleaseInSprint(It.IsAny<int>(), It.IsAny<int>())).Throws(new NullReferenceException());
-            ReleasePlanService service = new ReleasePlanService(mockReleasePlanRepo.Object, mockSprintRepository.Object);
+            ReleasePlansService service = new ReleasePlansService(mockReleasePlanRepo.Object);
             //act
             var ex = Record.Exception(() => service.UpdateReleaseInSprint(It.IsAny<Sprint>(), It.IsAny<int>()));
             //assert

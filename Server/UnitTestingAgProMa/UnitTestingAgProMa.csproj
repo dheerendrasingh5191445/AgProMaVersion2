@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MyNeo4j\MyNeo4j.csproj" />
+    <ProjectReference Include="..\AgpromaWebAPI\AgpromaWebAPI.csproj" />
   </ItemGroup>
 
 </Project>

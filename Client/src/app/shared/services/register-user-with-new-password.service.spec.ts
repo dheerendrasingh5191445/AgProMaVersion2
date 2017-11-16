@@ -82,7 +82,6 @@ describe('RegisterUserWithNewPasswordService', () => {
         registerUserWithNewPasswordService.updatePassword({ "id": 29, "firstName": "Lakshya", "lastName": "Lakshya1", "email": "Lakshya5", "password": "Lakshya9", "organization": "Niit", "department": "Hr" })
           .then((res) => { expect(res.status).toBe(200); })
       }));
-
       
   })
 });

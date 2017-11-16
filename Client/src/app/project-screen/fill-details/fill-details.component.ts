@@ -3,6 +3,7 @@ import { ProjectMaster } from '../../shared/model/ProjectMaster';
 import { ProjectScreenService } from './../../shared/services/project-screen.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import { ConfigFile } from './../../shared/config';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-fill-details',
@@ -53,11 +54,11 @@ export class FillDetailsComponent implements OnInit {
     {
 
       this.projectscrservice.addNewProject(this.projectData)
-                            .then(data => this.router.navigate([ConfigFile.FillDetailsUrls.dashboardNavigation]));
+                            .then(data => {swal('','Added Succesfully','success'); this.router.navigate([ConfigFile.FillDetailsUrls.dashboardNavigation])});
     }
     else
     {
-      window.alert("please fill all the details, Thank you!!!");
+      swal('please fill all the details','','error');
     }
   }
 

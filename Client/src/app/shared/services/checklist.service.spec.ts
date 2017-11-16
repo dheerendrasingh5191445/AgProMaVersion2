@@ -33,16 +33,16 @@ describe('ChecklistService', () => {
   });                                                    //end of first before each
   describe('checking', () => {              //start of second describe
     let service: ChecklistService;
-    beforeEach(inject([Http, XHRBackend], (http: Http, back: MockBackend,router:Router) => {    /* injecting service and backend dependencies*/
-      service = new ChecklistService(http,router);
+    beforeEach(inject([Http, XHRBackend], (http: Http, back: MockBackend, router: Router) => {    /* injecting service and backend dependencies*/
+      service = new ChecklistService(http, router);
     }));
     it('can instantiate service when inject service',       //First test case begins
       inject([ChecklistService], (service: ChecklistService) => {
         expect(service instanceof ChecklistService).toBe(true);
       }));                                                      //First test case ends
-    it('can instantiate service with "new"', inject([Http], (http: Http,router:Router) => {      //Second test case begins
+    it('can instantiate service with "new"', inject([Http], (http: Http, router: Router) => {      //Second test case begins
       expect(http).not.toBeNull('http should be provided');
-      let service = new ChecklistService(http,router);
+      let service = new ChecklistService(http, router);
       expect(service instanceof ChecklistService).toBe(true, 'new service should be ok');
     }));                                                                            //Second test case ends
     it('can provide the mockBackend as XHRBackend',                   //Third test case begins
@@ -143,6 +143,18 @@ describe('ChecklistService', () => {
         checklistService.deleteChecklists().catch(res => { }, error => {
           expect(error.status).toBe(500);
         })
+      }));
+    it('updateDailyStatusofTask',                                  //SIXTH test case begins
+      inject([ChecklistService, XHRBackend], (checklistService, mockBackend) => {
+        mockBackend.connections.subscribe((connection) => {
+          connection.mockRespond(new Response(new ResponseOptions({
+            status: 200
+          })
+          ));
+          expect(connection.request.method).toEqual(RequestMethod.Put, 'should return with correct method');
+        });
+        checklistService.updateDailyStatusofTask(18, { "taskId": 29, "checklistId": 18, "checklistName": "CSO UI", "status": false })
+          .then((res) => { expect(res.status).toBe(200); })
       }));
   });
 });

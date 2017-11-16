@@ -1,8 +1,8 @@
-﻿using Moq;
-using MyNeo4j.model;
-using MyNeo4j.Repository;
-using MyNeo4j.Service;
-using MyNeo4j.Viewmodel;
+﻿using AgpromaWebAPI.model;
+using AgpromaWebAPI.Repository;
+using AgpromaWebAPI.Service;
+using AgpromaWebAPI.Viewmodel;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +19,7 @@ namespace UnitTestingAgProMa.Services
             List<TaskBacklogView> taskv = new List<TaskBacklogView>() { new TaskBacklogView() { SprintId = 1 } };
             List<TaskBacklog> requests = new List<TaskBacklog>();
             var request = new TaskBacklog();
-            request.SprintId = 1;
+            request.StoryId = 1;
             requests.Add(request);
             //mocking RequestRepository
             var mockRepoReq = new Mock<ITaskRepository>();
@@ -30,7 +30,7 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetAll(1);
             //Assert
             Assert.NotNull(res);
-            Assert.Equal(taskv[0].SprintId, res[0].SprintId);
+            Assert.Equal(taskv[0].SprintId, res[0].StoryId);
 
         }
 
@@ -40,7 +40,7 @@ namespace UnitTestingAgProMa.Services
             //Arrange
             List<TaskBacklog> requests = new List<TaskBacklog>();
             var request = new TaskBacklog();
-            request.SprintId = 1;
+            request.StoryId = 1;
             requests.Add(request);
             //mocking RequestRepository
             var mockRepoReq = new Mock<ITaskRepository>();
@@ -98,7 +98,7 @@ namespace UnitTestingAgProMa.Services
             requests.Add(request);
             var r = new Sprint();
             var mockRepoReq = new Mock<ITaskRepository>(); //mocking RequestRepository
-            mockRepoReq.Setup(x => x.GetProjectId(It.IsAny<int>())).Returns(r);
+            mockRepoReq.Setup(x => x.GetProjectId(It.IsAny<int>())).Returns(1);
             TaskService obj = new TaskService(mockRepoReq.Object);
             //Act
             var res = obj.GetProjectId(1);
@@ -118,7 +118,7 @@ namespace UnitTestingAgProMa.Services
             var r = new Sprint();
             //mocking RequestRepository
             var mockRepoReq = new Mock<ITaskRepository>();
-            mockRepoReq.Setup(x => x.GetProjectId(It.IsAny<int>())).Returns(r);
+            mockRepoReq.Setup(x => x.GetProjectId(It.IsAny<int>())).Returns(1);
             TaskService obj = new TaskService(mockRepoReq.Object);
             //Act
             var res = obj.GetProjectId(1);
@@ -130,9 +130,9 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             TaskBacklog Backlog = new TaskBacklog();
-            Backlog.SprintId = 1;
+            Backlog.StoryId = 1;
             TaskBacklog Backlog1 = new TaskBacklog();
-            Backlog.SprintId = 2;
+            Backlog.StoryId = 2;
             var request = new TaskBacklog();
 
             var mockRepo = new Mock<ITaskRepository>();
@@ -146,9 +146,9 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             TaskBacklog Backlog = new TaskBacklog();
-            Backlog.SprintId = 1;
+            Backlog.StoryId = 1;
             TaskBacklog Backlog1 = new TaskBacklog();
-            Backlog.SprintId = 2;
+            Backlog.StoryId = 2;
             var request = new TaskBacklog();
             var mockRepo = new Mock<ITaskRepository>();
             mockRepo.Setup(x => x.Add(Backlog)).Throws(new FormatException());
@@ -161,9 +161,9 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             TaskBacklog Backlog = new TaskBacklog();
-            Backlog.SprintId = 1;
+            Backlog.StoryId = 1;
             TaskBacklog Backlog1 = new TaskBacklog();
-            Backlog.SprintId = 2;
+            Backlog.StoryId = 2;
             var request = new TaskBacklog();
             var mockRepo = new Mock<ITaskRepository>();
             mockRepo.Setup(x => x.Update(It.IsAny<int>(), Backlog)).Throws(new NullReferenceException());
@@ -176,9 +176,9 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             TaskBacklog Backlog = new TaskBacklog();
-            Backlog.SprintId = 1;
+            Backlog.StoryId = 1;
             TaskBacklog Backlog1 = new TaskBacklog();
-            Backlog.SprintId = 2;
+            Backlog.StoryId = 2;
             var request = new TaskBacklog();
             var mockRepo = new Mock<ITaskRepository>();
             mockRepo.Setup(x => x.Update(It.IsAny<int>(), Backlog)).Throws(new FormatException());
@@ -191,9 +191,9 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             TaskBacklog Backlog = new TaskBacklog();
-            Backlog.SprintId = 1;
+            Backlog.StoryId = 1;
             TaskBacklog Backlog1 = new TaskBacklog();
-            Backlog.SprintId = 2;
+            Backlog.StoryId = 2;
             var request = new TaskBacklog();
             var mockRepo = new Mock<ITaskRepository>();
             mockRepo.Setup(x => x.SetConnectionId(It.IsAny<string>(), It.IsAny<int>())).Throws(new NullReferenceException());
@@ -206,9 +206,9 @@ namespace UnitTestingAgProMa.Services
         {
             //Arrange
             TaskBacklog Backlog = new TaskBacklog();
-            Backlog.SprintId = 1;
+            Backlog.StoryId = 1;
             TaskBacklog Backlog1 = new TaskBacklog();
-            Backlog.SprintId = 2;
+            Backlog.StoryId = 2;
             var request = new TaskBacklog();
             var mockRepo = new Mock<ITaskRepository>();
             mockRepo.Setup(x => x.SetConnectionId(It.IsAny<string>(), It.IsAny<int>())).Throws(new FormatException());

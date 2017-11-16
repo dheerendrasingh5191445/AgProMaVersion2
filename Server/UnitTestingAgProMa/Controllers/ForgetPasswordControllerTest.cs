@@ -13,7 +13,7 @@ namespace UnitTestingAgProMa.Controllers
     public class ForgetPasswordControllerTest
     {
         [Fact]
-        public void Test_Case_To_Check_post_giving_true_sand_200status_code()
+        public void Test_Case_To_Check_post_giving_true_and_200status_code()
         {
             //Arrange
             var mockobj = new Mock<IforgetPassword>();

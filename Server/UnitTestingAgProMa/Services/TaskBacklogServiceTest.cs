@@ -1,19 +1,18 @@
-﻿using Moq;
-using MyNeo4j.model;
-using MyNeo4j.Repository;
-using MyNeo4j.Service;
-using MyNeo4j.Viewmodel;
+﻿using AgpromaWebAPI.model;
+using AgpromaWebAPI.Repository;
+using AgpromaWebAPI.Service;
+using AgpromaWebAPI.Viewmodel;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-
 namespace UnitTestingAgProMa.Services
 {
-   public class TaskBacklogServiceTest
+    public class TaskBacklogServiceTest
     {
         [Fact]
-        public void SignUpServiceUnitTest_to_GetAllTaskDetail_for_NotNull()
+        public void TaskBacklogServiceUnitTest_to_GetAllTaskDetail_for_NotNull()
         {
             //Arrange
             List<TaskBacklog> tasks = new List<TaskBacklog>();
@@ -27,10 +26,9 @@ namespace UnitTestingAgProMa.Services
             var res = obj.GetAllTask(1);
             //Assert
             Assert.Equal(1, res.Count);
-
         }
         [Fact]
-        public void SignUpServiceUnitTest_to_GetAllTaskDetail_for_Null()
+        public void TaskBacklogServiceUnitTest_to_GetAllTaskDetail_for_Null()
         {
             //Arrange
             List<TaskBacklog> tasks = new List<TaskBacklog>();
@@ -43,7 +41,7 @@ namespace UnitTestingAgProMa.Services
             Assert.Equal(0, res.Count);
         }
         [Fact]
-        public void SignUpServiceUnitTest_to_GetTeamMember_for_NotNull()
+        public void TaskBacklogServiceUnitTest_to_GetTeamMember_for_NotNull()
         {
             //Arrange
             List<AvailTeamMember> teams = new List<AvailTeamMember>();
@@ -61,7 +59,7 @@ namespace UnitTestingAgProMa.Services
             Assert.Equal(teams.ToString(), res.ToString());
         }
         [Fact]
-        public void SignUpServiceUnitTest_to_GetTeamMember_for_Null()
+        public void TaskBacklogServiceUnitTest_to_GetTeamMember_for_Null()
         {
             //Arrange
             List<AvailTeamMember> teams = new List<AvailTeamMember>();
@@ -77,36 +75,31 @@ namespace UnitTestingAgProMa.Services
             res = teams;
             //Assert
             Assert.Null(res);
-
         }
-
         [Fact]
-        public void Backlog_serive_Add_method_throw_exception_with_invalid_value_type()
+        public void TaskBacklogService_Add_method_throw_exception_with_invalid_value_type()
         {
             TaskBacklog task = new TaskBacklog();
-            task.PersonId = 1;
+            task.UserId = 1;
             var mockrepo = new Mock<ITaskBacklogReposiory>();
             mockrepo.Setup(x => x.Update(1, 1)).Throws(new NullReferenceException());
             TaskBacklogService obj = new TaskBacklogService(mockrepo.Object);
             var exception = Record.Exception(() => obj.UpdateTask(1, 1));
             Assert.IsType<NullReferenceException>(exception);
-
         }
         [Fact]
-        public void SignUpServiceUnitTest_to_GetProjectId_for_NotNull()
+        public void TaskBacklogServiceServiceUnitTest_to_GetProjectId_for_NotNull()
         {
             ////Arrange
             var sprint = new Sprint() { SprintId = 1 };
             var mockRepo = new Mock<ITaskBacklogReposiory>();
-            mockRepo.Setup(x => x.GetProjectId(1)).Returns(sprint);
+            mockRepo.Setup(x => x.GetProjectId(1)).Returns(0);
             TaskBacklogService obj = new TaskBacklogService(mockRepo.Object);
             //Act
             var res = obj.GetProjectId(1);
             //Assert
             Assert.NotNull(res);
             Assert.Equal(sprint.ProjectId, res);
-
         }
-
     }
 }

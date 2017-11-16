@@ -1,11 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 .container-fluid {
-  font-family: 'Raleway', Arial, sans-serif !important;
+  
 }
 button.buttonStyle
 {
- font-family: 'Raleway', Arial, sans-serif;
   border: none;
   background-color: #009999;
   border-radius: 5px;
@@ -217,25 +215,7 @@ border-radius: 1rem;
    filter: blur (0.7px);
   -webkit-filter: blur(0.7px);
 }
- /* .div_details:hover .btnPencil{
-  display:block;
-}
-.div_details .btnPencil{
-  display:none;
-  position:absolute;
-  margin-left:80%;
-  margin-bottom: 50%;
-}
-.div_details:hover .btnDustbin{
-  display:block;
-}
-.div_details .btnDustbin{
-  display:none;
-  position:absolute;
-  margin-left:90%;
-  margin-bottom:50%;
-  
-} */
+
 .div_details:hover .contentstory{
   display: block;
 }

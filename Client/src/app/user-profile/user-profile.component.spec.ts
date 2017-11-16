@@ -9,7 +9,6 @@ import { ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs'
 import { RouterTestingModule } from '@angular/router/testing';
 import swal from 'sweetalert2';
-
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
@@ -33,7 +32,6 @@ describe('UserProfileComponent', () => {
     })
     .compileComponents();
   }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
@@ -42,7 +40,6 @@ describe('UserProfileComponent', () => {
     spy=spyOn(login,'getById').and.returnValue(Observable.of(MOCKMASTER));
     fixture.detectChanges();
   });
-
   it('should be created', () => {
     expect(component).toBeTruthy();
   });

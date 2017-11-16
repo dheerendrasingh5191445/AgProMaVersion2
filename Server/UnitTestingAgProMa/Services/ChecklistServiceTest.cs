@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AgpromaWebAPI.model;
+using AgpromaWebAPI.Repository;
+using AgpromaWebAPI.Service;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
-using MyNeo4j.Controllers;
-using MyNeo4j.model;
-using MyNeo4j.Service;
-using MyNeo4j.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -92,7 +91,5 @@ namespace MyNeo4j_Test_Cases.Service
             //Assert
             Assert.IsType<NullReferenceException>(exception);
         }
-
-
     }
 }
